@@ -2,10 +2,10 @@
 
 import useTicTacToeState from "@/hooks/useGameState";
 import { useTicTacToeLogic } from "@/hooks/useTicTacToeLogic";
-import ScoreBoard from "../scoreBoard/ScoreBoard";
+import ScoreBoard from "../ScoreBoard";
 import ButtonGroup from "../ButtonGroup";
 import MoveHistory from "../MoveHistory";
-import Board from "../board/Board";
+import Board from "../Board";
 import Modal from "../modal/Modal";
 
 export default function OfflineMode() {

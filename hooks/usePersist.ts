@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-// Define a generic type for the state
 function usePersist<T>(
   key: string,
   initialValue: T
@@ -15,7 +14,6 @@ function usePersist<T>(
     }
   });
 
-  // Update local storage whenever the state changes
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);

@@ -1,5 +1,5 @@
 import { BoardType } from "@/types/ticTacToeTypes";
-import Button from "../ui/Button";
+import Button from "./ui/Button";
 
 interface GameBoardProps {
   board: BoardType;
