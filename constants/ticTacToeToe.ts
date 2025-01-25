@@ -1,4 +1,6 @@
-export const initialBoardState = Array(9).fill(null);
+import { BoardType } from "@/types/ticTacToeTypes";
+
+export const initialBoardState: BoardType = Array(9).fill(null);
 
 export const WIN_CONDITIONS = [
   [0, 1, 2],

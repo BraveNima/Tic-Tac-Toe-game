@@ -26,7 +26,6 @@ export default function Board({
         {board.map((item, id) => (
           <div className="w-full h-full border-8 border-black" key={id}>
             <Button
-              id={item}
               value={item}
               onClick={() => item === null && onClick(id)}
               playing={playing}

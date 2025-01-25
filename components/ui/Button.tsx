@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 interface ButtonProps {
-  id: string | undefined;
-  value: string | undefined;
-  onClick: (id: string | number) => void;
+  value: string | null;
+  onClick: () => void;
   playing: boolean;
   playAgainClicked: boolean;
   gameOver: boolean;
@@ -11,7 +10,6 @@ interface ButtonProps {
 }
 
 export default function Button({
-  id,
   value,
   onClick,
   playing,
@@ -29,7 +27,7 @@ export default function Button({
   const handleClick = () => {
     if (!isRestricted) {
       setClicked(true);
-      onClick(null);
+      onClick();
     } else {
     }
   };
@@ -43,7 +41,6 @@ export default function Button({
             : "oHover"
           : ""
       } ${value === null ? "" : "animate-font"}`}
-      id={id}
       onClick={handleClick}
     >
       {value}

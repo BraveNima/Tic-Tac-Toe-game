@@ -2,19 +2,17 @@
 
 import useTicTacToeState from "@/hooks/useGameState";
 import { useTicTacToeLogic } from "@/hooks/useTicTacToeLogic";
+import ScoreBoard from "../scoreBoard/ScoreBoard";
 import ButtonGroup from "../ButtonGroup";
 import MoveHistory from "../MoveHistory";
 import Board from "../board/Board";
 import Modal from "../modal/Modal";
-import ScoreBoard from "../scoreBoard/ScoreBoard";
 
 export default function OfflineMode() {
   const {
     board,
     isXPlaying,
-    xScore,
-    oScore,
-    tieScore,
+    scores,
     gameOver,
     playAgainClicked,
     showModal,
@@ -54,7 +52,7 @@ export default function OfflineMode() {
           <MoveHistory history={moveHistory} onSelectMove={handleSelectMove} />
         </div>
         <div className="flex flex-col md:w-[70%] ">
-          <ScoreBoard xScore={xScore} oScore={oScore} tieScore={tieScore} />
+          <ScoreBoard scores={scores} />
           <Board
             board={board}
             onClick={gameOver ? () => {} : handlePlayerMove}

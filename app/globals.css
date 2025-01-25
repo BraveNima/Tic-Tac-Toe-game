@@ -4,10 +4,15 @@
 
 @layer components {
   .btn-secondary {
-    @apply text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-xl px-5  gap-2 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2;
+    @apply text-gray-900 bg-Saffron hover:bg-Saffron focus:ring-4 focus:outline-none focus:ring-Saffron/50 font-medium rounded-lg text-xl px-5 gap-2 py-2.5 text-center inline-flex items-center dark:focus:ring-Saffron/50 me-2 mb-2;
   }
   .btn-primary {
     @apply border-[5px] cursor-pointer border-black rounded-md px-8 py-1 bg-[#C9F9FC] disabled:cursor-not-allowed;
+  }
+}
+@layer utilities {
+  .flex-center {
+    @apply flex flex-col items-center justify-center;
   }
 }
 

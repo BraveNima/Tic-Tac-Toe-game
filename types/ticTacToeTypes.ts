@@ -3,7 +3,7 @@ export type Move = {
   position: number;
 };
 
-export type BoardType = (string | undefined)[];
+export type BoardType = (string | null)[];
 
 export type Scores = {
   x: number;

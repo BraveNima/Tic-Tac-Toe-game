@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import OfflineMode from "@/components/GameModes/OfflineMode";
 
 export default function page() {
-  return <OfflineMode />;
+  return (
+    <Suspense>
+      <OfflineMode />
+    </Suspense>
+  );
 }

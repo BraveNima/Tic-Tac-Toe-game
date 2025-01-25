@@ -14,7 +14,7 @@ export default function ButtonGroup({
   currentStep,
 }: ButtonGroupProps) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 ">
+    <div className="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3">
       <button
         onClick={onUndo}
         disabled={currentStep === 0}

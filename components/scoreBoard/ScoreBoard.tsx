@@ -3,31 +3,26 @@
 import Image from "next/image";
 import circle from "@/public/circle.svg";
 import x from "@/public/x.svg";
+import { Scores } from "@/types/ticTacToeTypes";
 
 type ScoreBoardProps = {
-  xScore: number;
-  oScore: number;
-  tieScore: number;
+  scores: Scores;
 };
 
-export default function ScoreBoard({
-  xScore,
-  oScore,
-  tieScore,
-}: ScoreBoardProps) {
+export default function ScoreBoard({ scores }: ScoreBoardProps) {
   return (
-    <div className="flex gap-4 py-4 rounded-lg px-4 justify-around items-center mx-auto md:w-[460px] mt-2 p-2 shadow-[2px_2px_6px_rgba(206,204,204,1),-1px_-1px_5px_rgba(206,204,204,1)] mb-8">
-      <div className="flex flex-col items-center justify-center">
+    <div className="flex gap-4 py-4 rounded-lg px-4 justify-around items-center mx-auto md:w-[460px] mt-4 p-2 shadow-custom mb-8">
+      <div className="flex-center">
         <Image src={x} alt="x" className="cursor-pointer h-12" />
-        <h3 className="text-sm text-black">Player X&apos;s Wins: {xScore}</h3>
+        <h3 className="text-sm text-black">Player X&apos;s Wins: {scores.x}</h3>
       </div>
-      <div className="transition-colors flex flex-col items-center justify-center">
+      <div className="transition-colors flex-center">
         <Image src={circle} alt="circle" className="cursor-pointer h-12" />
-        <h3 className="text-sm text-black">Player O&apos;s Wins: {oScore}</h3>
+        <h3 className="text-sm text-black">Player O&apos;s Wins: {scores.o}</h3>
       </div>
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex-center gap-4">
         <div className="text-[#FCD015] text-3xl">Draw</div>
-        <h3 className="text-sm">Ties: {tieScore}</h3>
+        <h3 className="text-sm">Ties: {scores.tie}</h3>
       </div>
     </div>
   );

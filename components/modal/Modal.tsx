@@ -14,7 +14,7 @@ export default function Modal({ message, onPlayAgain }: ModalProps) {
             <h6 className="text-4xl">Winner!</h6>
           )}
           <div>
-            <button className="border-3  rounded bg-white text-[#F7BE38] p-0.75 px-4.5 text-[3.2rem] mt-2 mb-5 mx-2">
+            <button className="border-3 rounded bg-white text-Saffron p-0.75 px-4.5 text-[3.2rem] mt-2 mb-5 mx-2">
               {message}
             </button>
           </div>

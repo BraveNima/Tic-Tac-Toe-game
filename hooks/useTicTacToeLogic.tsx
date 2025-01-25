@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { initialBoardState, WIN_CONDITIONS } from "@/constants/ticTacToeToe";
-import { BoardType, Move } from "@/types/ticTacToeTypes";
+import { BoardType, Move, Scores } from "@/types/ticTacToeTypes";
 import usePersist from "./usePersist";
 import { checkWinner } from "@/utils/gameLogic";
 
@@ -10,17 +10,18 @@ const useTicTacToeLogic = () => {
   const [board, setBoard] = useState<BoardType>(initialBoardState);
   const [moveHistory, setMoveHistory] = useState<Move[] | []>([]);
   const [history, setHistory] = useState([initialBoardState]);
-  const [xScore, setXScore] = usePersist<number>("xScore", 0);
-  const [oScore, setOScore] = usePersist<number>("oScore", 0);
-  const [tieScore, setTieScore] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [modalMessage, setModalMessage] = useState("");
   const [isXPlaying, setIsXPlaying] = useState(true);
   const [gameOver, setGameOver] = useState(false);
   const [playAgainClicked, setPlayAgainClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [scores, setScores] = usePersist<Scores>("scores", {
+    x: 0,
+    o: 0,
+    tie: 0,
+  });
 
-  // Function to reset the game after a win or tie
   const reset = (currentWinner: "O" | "X" | "tie") => {
     setModalMessage(currentWinner);
     setIsXPlaying(isXPlaying);
@@ -34,6 +35,7 @@ const useTicTacToeLogic = () => {
     setBoard(Array(9).fill(null));
     setHistory([initialBoardState]);
     setGameOver(false);
+    setCurrentStep(0);
     setPlayAgainClicked(true);
     setMoveHistory([]);
     setTimeout(() => {
@@ -41,7 +43,6 @@ const useTicTacToeLogic = () => {
     }, 500);
   };
 
-  // Function to handle the result of the game (win/tie)
   const handleGameResult = (updatedBoard: BoardType) => {
     const winner = checkWinner(updatedBoard);
 
@@ -65,12 +66,11 @@ const useTicTacToeLogic = () => {
       });
       animateWinningCells(winningCells);
       if (winner === "X") {
-        setXScore(xScore + 1);
+        setScores((prevScores) => ({ ...prevScores, x: prevScores.x + 1 }));
         setGameOver(true);
         reset("X");
       } else {
-        setOScore(oScore + 1);
-
+        setScores((prevScores) => ({ ...prevScores, o: prevScores.o + 1 }));
         setGameOver(true);
         reset("O");
       }
@@ -84,13 +84,12 @@ const useTicTacToeLogic = () => {
     });
 
     if (allFilled && winner !== "X" && winner !== "O") {
-      setTieScore(tieScore + 1);
+      setScores((prevScores) => ({ ...prevScores, tie: prevScores.tie + 1 }));
       setGameOver(true);
       reset("tie");
     }
   };
 
-  // Function to handle the button click for a player's move
   const handlePlayerMove = (clickedBtnId: number) => {
     const updatedBoard = board.map((value, id) => {
       if (id === clickedBtnId) {
@@ -112,11 +111,10 @@ const useTicTacToeLogic = () => {
     return updatedBoard;
   };
 
-  // Function to handle selecting a move from history
   const handleSelectMove = (index: number) => {
     const selectedMoves: Move[] = moveHistory.slice(0, index + 1);
 
-    const newBoard: (string | undefined)[] = Array(9).fill(null);
+    const newBoard: BoardType = Array(9).fill(null);
     selectedMoves.forEach((move) => {
       newBoard[move.position] = move.player;
     });
@@ -134,7 +132,7 @@ const useTicTacToeLogic = () => {
     if (currentStep > 0) {
       const newStep = currentStep - 1;
       updateStep(currentStep - 1);
-      setMoveHistory(moveHistory.slice(0, newStep)); // Update move history
+      setMoveHistory(moveHistory.slice(0, newStep));
     }
   };
 
@@ -142,7 +140,7 @@ const useTicTacToeLogic = () => {
     if (currentStep < history.length - 1) {
       const newStep = currentStep + 1;
       updateStep(newStep);
-      const player: "X" | "O" = newStep % 2 === 0 ? "X" : "O";
+      const player = isXPlaying ? "X" : "O";
       const lastMove = history[newStep];
       const position = lastMove.findIndex((cell) => cell !== null);
       const newMove: Move = { player, position };
@@ -150,14 +148,10 @@ const useTicTacToeLogic = () => {
     }
   };
 
-  // Function to reset scores
   const resetScores = () => {
-    setXScore(0);
-    setOScore(0);
-    setTieScore(0);
+    setScores({ x: 0, o: 0, tie: 0 });
   };
 
-  // Function to reset the board and game state
   const resetBoard = () => {
     setBoard(Array(9).fill(null));
     setMoveHistory([]);
@@ -169,7 +163,6 @@ const useTicTacToeLogic = () => {
     setModalMessage("");
   };
 
-  // Function to reset everything (board + scores)
   const resetGame = () => {
     resetBoard();
     resetScores();
@@ -181,9 +174,7 @@ const useTicTacToeLogic = () => {
     resetGame,
     isXPlaying,
     setIsXPlaying,
-    xScore,
-    oScore,
-    tieScore,
+    scores,
     gameOver,
     playAgainClicked,
     showModal,
