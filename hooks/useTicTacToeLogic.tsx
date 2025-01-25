@@ -27,7 +27,7 @@ const useTicTacToeLogic = () => {
     setIsXPlaying(isXPlaying);
     setTimeout(() => {
       setShowModal(true);
-    }, 1200);
+    }, 600);
   };
 
   const handlePlayAgain = () => {
