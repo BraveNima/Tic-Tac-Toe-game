@@ -2,20 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .btn-secondary {
+    @apply text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-xl px-5  gap-2 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2;
+  }
+  .btn-primary {
+    @apply border-[5px] cursor-pointer border-black rounded-md px-8 py-1 bg-[#C9F9FC] disabled:cursor-not-allowed;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 6.33rem);
+  grid-template-rows: repeat(3, 6.33rem);
+  place-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.xHover:hover {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.oHover:hover {
+  background-color: rgba(0, 0, 255, 0.25);
+}
+
+.animate-font {
+  animation: fontPopUp 0.4s;
+}
+
+@keyframes fontPopUp {
+  0% {
+    font-size: 0rem;
+  }
+
+  100% {
+    font-size: 5rem;
+  }
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

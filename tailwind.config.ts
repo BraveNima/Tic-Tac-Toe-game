@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        "game-cover": "url('../public/Cover.jpeg')",
+      },
     },
   },
   plugins: [],
